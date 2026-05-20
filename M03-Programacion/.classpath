@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="exceptions"/>
+	<classpathentry kind="src" path="game"/>
+	<classpathentry kind="src" path="units/attack"/>
+	<classpathentry kind="src" path="units/special"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

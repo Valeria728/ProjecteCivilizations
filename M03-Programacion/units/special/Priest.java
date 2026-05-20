@@ -1,11 +1,7 @@
 package units.special;
-/*El Priest es una unidad de soporte (0 de ataque) 
-y completamente indefensa (0 de armadura). 
-Cuesta recursos y maná, y está diseñado para aportar 
-valor al ejército a través de habilidades místicas en lugar de fuerza bruta.*/ 
 
 import units.SpecialUnit;
-// Sacerdote que hereda de SpecialUnit, unidad de soporte, no hace daño.
+
 public class Priest extends SpecialUnit{
 
     public Priest() {

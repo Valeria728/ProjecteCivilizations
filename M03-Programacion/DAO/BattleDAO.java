@@ -9,10 +9,10 @@ import game.Battle;
 
 public class BattleDAO {
 
-    private Connection con; 
+    private Connection con;
 
     public BattleDAO() {
-        this.con = DatabaseConnection.getConnection(); // obtiene la conexión a la base de datos
+        this.con = DatabaseConnection.getConnection();
     }
 
     // Guarda el resultado completo de una batalla
@@ -50,7 +50,7 @@ public class BattleDAO {
         int[][] initialArmies = battle.getInitialArmies();
         int[][] drops = battle.getDrops(); // drops[0] = nuestra civ, drops[1] = enemigo
 
-        // Ataque (posiciones 0-3) 
+        // Ataque (posiciones 0-3)
         for (int i = 0; i <= 3; i++) {
             saveUnitStatRow(civId, numBattle, attackTypes[i],
                     initialArmies[0][i], drops[0][i],
@@ -84,10 +84,10 @@ public class BattleDAO {
                     "enemy_attack_stats");
         }
     }
-    // Método genérico para guardar stats de unidades en la tabla correspondiente
+
     private void saveUnitStatRow(int civId, int numBattle, String type, int initial, int unitDrops, String tableName) {
         String sql = "INSERT INTO " + tableName + " (civilization_id, num_battle, type, initial_count, drops) VALUES (?,?,?,?,?)";
-        try { // usa PreparedStatement para evitar SQL injection y manejar parámetros de forma segura
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, civId);
             ps.setInt(2, numBattle);
@@ -96,7 +96,7 @@ public class BattleDAO {
             ps.setInt(5, unitDrops);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException e) { // captura cualquier error SQL y lo imprime en consola para depuración
+        } catch (SQLException e) {
             System.out.println("Error guardando unidad en " + tableName + ": " + e.getMessage());
         }
     }
@@ -106,7 +106,7 @@ public class BattleDAO {
         String[] lines = development.split("\n");
         for (int i = 0; i < lines.length; i++) {
             String sql = "INSERT INTO battle_log (civilization_id, num_battle, num_line, log_entry) VALUES (?,?,?,?)";
-            try { // usa PreparedStatement para manejar la inserción de cada línea del log de forma segura
+            try {
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setInt(1, civId);
                 ps.setInt(2, numBattle);
@@ -124,8 +124,7 @@ public class BattleDAO {
     public String loadBattleLog(int civId, int numBattle) {
         StringBuilder sb = new StringBuilder();
         String sql = "SELECT log_entry FROM battle_log WHERE civilization_id=? AND num_battle=? ORDER BY num_line";
-        try { /* usa PreparedStatement para consultar el log de batalla de forma segura, 
-                ordenando por num_line para mantener el orden original del log*/
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, civId);
             ps.setInt(2, numBattle);
@@ -145,8 +144,7 @@ public class BattleDAO {
     public int getBattleCount(int civId) {
         int count = 0;
         String sql = "SELECT COUNT(*) FROM battle_stats WHERE civilization_id=?";
-        try { /* usa PreparedStatement para contar el número de batallas 
-                registradas para una civilización específica de forma segura*/
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, civId);
             ResultSet rs = ps.executeQuery();

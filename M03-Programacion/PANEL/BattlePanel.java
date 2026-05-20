@@ -18,22 +18,21 @@ public class BattlePanel extends JPanel {
     private DefaultListModel<String> listModel;
     private JList<String> battleList;
     private JTextArea reportArea;
-    /* Constructor del panel, recibe el DAO para acceder a los datos 
-     de las batallas y el ID de la civilización.*/
+
     public BattlePanel(BattleDAO battleDAO, int civId) {
         this.battleDAO = battleDAO;
         this.civId = civId;
         setBackground(new Color(30, 30, 40));
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        /*Crea el texto principal, tipo letray color */ 
+
         JLabel title = new JLabel("Historial de Batallas", JLabel.CENTER);
         title.setFont(new Font("SansSerif", Font.BOLD, 16));
         title.setForeground(new Color(255, 215, 0));
         add(title, BorderLayout.NORTH);
 
         // Panel izquierdo: lista de batallas
-        listModel = new DefaultListModel<String>(); // añadir elementos dinámicamente.
+        listModel = new DefaultListModel<String>();
         battleList = new JList<String>(listModel);
         battleList.setBackground(new Color(40, 40, 55));
         battleList.setForeground(new Color(200, 220, 255));
@@ -41,7 +40,7 @@ public class BattlePanel extends JPanel {
         battleList.setSelectionBackground(new Color(80, 80, 160));
         battleList.setFixedCellHeight(28);
 
-        JScrollPane listScroll = new JScrollPane(battleList); // Barra lateral desplazamineto
+        JScrollPane listScroll = new JScrollPane(battleList);
         listScroll.setPreferredSize(new Dimension(180, 0));
         listScroll.setBorder(BorderFactory.createTitledBorder(
             BorderFactory.createLineBorder(new Color(100, 100, 160)),
@@ -49,12 +48,12 @@ public class BattlePanel extends JPanel {
             new Font("SansSerif", Font.BOLD, 12), new Color(255, 215, 0)
         ));
 
-        // Panel derecho: log de la batalla seleccionada, ver reporte ballata.
+        // Panel derecho: log de la batalla seleccionada
         reportArea = new JTextArea();
         reportArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        reportArea.setBackground(new Color(20, 20, 30));  // configurada estilo antiguo, fondo oscuro.
-        reportArea.setForeground(new Color(200, 240, 200));  // texto verde claro para resaltar.
-        reportArea.setEditable(false); // solo lectura.
+        reportArea.setBackground(new Color(20, 20, 30));
+        reportArea.setForeground(new Color(200, 240, 200));
+        reportArea.setEditable(false);
         reportArea.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
         JScrollPane reportScroll = new JScrollPane(reportArea);
@@ -71,10 +70,6 @@ public class BattlePanel extends JPanel {
         btnLog.setFont(new Font("SansSerif", Font.BOLD, 12));
         btnLog.setFocusPainted(false);
         btnLog.addActionListener(new ActionListener() {
-            /* Al hacer clic, muestra un diálogo con el log completo de 
-             la batalla seleccionada.
-             Viaja hasta la BD a buscar la batalla seleccionada y hace un reporte 
-             en una ventana flotante. */
             public void actionPerformed(ActionEvent e) {
                 int selected = battleList.getSelectedIndex();
                 if (selected >= 0) {
@@ -105,7 +100,7 @@ public class BattlePanel extends JPanel {
                     if (log.isEmpty()) {
                         reportArea.setText("No hay datos guardados para esta batalla.");
                     } else {
-                        // Solo mostrar las primeras líneas como resumen, las 50 primeras.
+                        // Solo mostrar las primeras líneas como resumen
                         String[] lines = log.split("\n");
                         StringBuilder sb = new StringBuilder();
                         int maxLines = 50;
@@ -121,15 +116,14 @@ public class BattlePanel extends JPanel {
                 }
             }
         });
-        /* Panel dividido horizontalmente entre la lista de batallas 
-         y el reporte de la batalla seleccionada.*/
+
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listScroll, reportScroll);
         split.setDividerLocation(200);
         split.setBackground(new Color(30, 30, 40));
         split.setBorder(null);
 
-        add(split, BorderLayout.CENTER); // Centra el panel dividido.
-        add(btnLog, BorderLayout.SOUTH); // Botón debajo del panel principal.
+        add(split, BorderLayout.CENTER);
+        add(btnLog, BorderLayout.SOUTH);
 
         // Cargar batallas existentes
         refreshBattleList(battleDAO, civId);
@@ -148,6 +142,5 @@ public class BattlePanel extends JPanel {
             reportArea.setText("Aún no hay batallas registradas.\n" +
                                "Los ejércitos enemigos aparecen cada 3 minutos.");
         }
-    }  /* Método para actualizar la lista de batallas, se llama desde el exterior 
-         cuando se registra una nueva batalla.*/
+    }
 }

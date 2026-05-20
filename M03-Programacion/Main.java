@@ -80,41 +80,31 @@ public class Main implements Variables {
 
             if (option.equals("1")) {
                 menuBuildUnits();
-            } 
-            else if (option.equals("2")) {
+            } else if (option.equals("2")) {
                 menuBuildings();
-            } 
-            else if (option.equals("3")) {
+            } else if (option.equals("3")) {
                 menuTechnology();
-            } 
-            else if (option.equals("4")) {
+            } else if (option.equals("4")) {
                 viewBattleReports();
-            } 
-            else if (option.equals("5")) {
+            } else if (option.equals("5")) {
                 if (enemyArrived) {
                     startBattle();
-                } 
-                else {
+                } else {
                     System.out.println("No enemy is attacking right now.");
                 }
-            } 
-            else if (option.equals("6")) {
+            } else if (option.equals("6")) {
                 if (enemyArrived) {
                     viewThreat();
-                } 
-                else {
+                } else {
                     System.out.println("No enemy threat at the moment.");
                 }
-            } 
-            else if (option.equals("7")) {
+            } else if (option.equals("7")) {
                 civilization.printStats();
-            } 
-            else if (option.equals("0")) {
+            } else if (option.equals("0")) {
                 System.out.println("Goodbye!");
                 timer.cancel();
                 running = false;
-            } 
-            else {
+            } else {
                 System.out.println("Invalid option, please try again.");
             }
         }
@@ -164,88 +154,40 @@ public class Main implements Variables {
                 String amountStr = scanner.nextLine().trim();
                 try {
                     amount = Integer.parseInt(amountStr);
-                } 
-                catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Invalid number.");
                     continue;
                 }
                 if (opt.equals("1")) {
                     try { civilization.newSwordsman(amount); }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("2")) {
-                    try { 
-                        civilization.newSpearman(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("3")) {
-                    try { 
-                        civilization.newCrossbow(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("4")) {
-                    try { 
-                        civilization.newCannon(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("5")) {
-                    try { 
-                        civilization.newArrowTower(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("6")) {
-                    try { 
-                        civilization.newCatapult(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("7")) {
-                    try { 
-                        civilization.newRocketLauncher(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("8")) {
-                    try { 
-                        civilization.newMagician(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                    catch (BuildingException e) { 
-                        System.out.println("[ERROR] " + e.getMessage()); 
-                    }
-                } 
-                else if (opt.equals("9")) {
-                    try { 
-                        civilization.newPriest(amount); 
-                    }
-                    catch (ResourceException e) { 
-                        System.out.println("[WARNING] " + e.getMessage()); 
-                    }
-                    catch (BuildingException e) { 
-                        System.out.println("[ERROR] " + e.getMessage()); 
-                    }
-                } 
-                else {
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("2")) {
+                    try { civilization.newSpearman(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("3")) {
+                    try { civilization.newCrossbow(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("4")) {
+                    try { civilization.newCannon(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("5")) {
+                    try { civilization.newArrowTower(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("6")) {
+                    try { civilization.newCatapult(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("7")) {
+                    try { civilization.newRocketLauncher(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                } else if (opt.equals("8")) {
+                    try { civilization.newMagician(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                    catch (BuildingException e) { System.out.println("[ERROR] " + e.getMessage()); }
+                } else if (opt.equals("9")) {
+                    try { civilization.newPriest(amount); }
+                    catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+                    catch (BuildingException e) { System.out.println("[ERROR] " + e.getMessage()); }
+                } else {
                     System.out.println("Invalid option.");
                 }
             }
@@ -269,40 +211,20 @@ public class Main implements Variables {
                 back = true;
             } else if (opt.equals("1")) {
                 try { civilization.newFarm(); }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
             } else if (opt.equals("2")) {
                 try { civilization.newCarpentry(); }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
-            } 
-            else if (opt.equals("3")) {
-                try { 
-                    civilization.newSmithy(); 
-                }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
-            } 
-            else if (opt.equals("4")) {
-                try { 
-                    civilization.newMagicTower(); 
-                }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
-            } 
-            else if (opt.equals("5")) {
-                try { 
-                    civilization.newChurch(); 
-                }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
-            } 
-            else {
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+            } else if (opt.equals("3")) {
+                try { civilization.newSmithy(); }
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+            } else if (opt.equals("4")) {
+                try { civilization.newMagicTower(); }
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+            } else if (opt.equals("5")) {
+                try { civilization.newChurch(); }
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+            } else {
                 System.out.println("Invalid option.");
             }
         }
@@ -322,24 +244,13 @@ public class Main implements Variables {
 
             if (opt.equals("0")) {
                 back = true;
-            } 
-            else if (opt.equals("1")) {
-                try { 
-                    civilization.upgradeTechnologyAttack(); 
-                }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
-            } 
-            else if (opt.equals("2")) {
-                try { 
-                    civilization.upgradeTechnologyDefense(); 
-                }
-                catch (ResourceException e) { 
-                    System.out.println("[WARNING] " + e.getMessage()); 
-                }
-            } 
-            else {
+            } else if (opt.equals("1")) {
+                try { civilization.upgradeTechnologyAttack(); }
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+            } else if (opt.equals("2")) {
+                try { civilization.upgradeTechnologyDefense(); }
+                catch (ResourceException e) { System.out.println("[WARNING] " + e.getMessage()); }
+            } else {
                 System.out.println("Invalid option.");
             }
         }
@@ -411,21 +322,17 @@ public class Main implements Variables {
 
             if (!enoughForSwordsman) {
                 canCreate = false;
-            } 
-            else {
+            } else {
                 // Pick unit by probability: Swordsman 35%, Spearman 25%, Crossbow 20%, Cannon 20%
                 int rnd = random.nextInt(100) + 1;
                 int unitType;
                 if (rnd <= 35) {
                     unitType = 0; // Swordsman
-                } 
-                else if (rnd <= 60) {
+                } else if (rnd <= 60) {
                     unitType = 1; // Spearman
-                } 
-                else if (rnd <= 80) {
+                } else if (rnd <= 80) {
                     unitType = 2; // Crossbow
-                } 
-                else {
+                } else {
                     unitType = 3; // Cannon
                 }
 
@@ -438,27 +345,23 @@ public class Main implements Variables {
                 boolean canAffordFallback = canAffordUnit(unitType, foodAvail, woodAvail, ironAvail);
                 if (!canAffordFallback) {
                     canCreate = false;
-                } 
-                else {
+                } else {
                     MilitaryUnit unit = null;
                     if (unitType == 0) {
                         unit = new Swordsman();
                         foodAvail = foodAvail - FOOD_COST_SWORDSMAN;
                         woodAvail = woodAvail - WOOD_COST_SWORDSMAN;
                         ironAvail = ironAvail - IRON_COST_SWORDSMAN;
-                    } 
-                    else if (unitType == 1) {
+                    } else if (unitType == 1) {
                         unit = new Spearman();
                         foodAvail = foodAvail - FOOD_COST_SPEARMAN;
                         woodAvail = woodAvail - WOOD_COST_SPEARMAN;
                         ironAvail = ironAvail - IRON_COST_SPEARMAN;
-                    } 
-                    else if (unitType == 2) {
+                    } else if (unitType == 2) {
                         unit = new Crossbow();
                         woodAvail = woodAvail - WOOD_COST_CROSSBOW;
                         ironAvail = ironAvail - IRON_COST_CROSSBOW;
-                    } 
-                    else {
+                    } else {
                         unit = new Cannon();
                         woodAvail = woodAvail - WOOD_COST_CANNON;
                         ironAvail = ironAvail - IRON_COST_CANNON;
