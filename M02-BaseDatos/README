@@ -1,3 +1,9 @@
-Hoy he iniciado a generar la base de datos co nun script que contiene 
+Hoy he iniciado a generar la base de datos con un script que contiene 
 Battle, palyer army y player stats, se han hecho ls inserts de los datos proporcionados en 
 pdf del projecto.
+Despues de varios dias de creacion y pruebas , hemos mejorado el script inicial, se han añadido las tablas 
+y conexiones necesarias para que el programa tenga plena fluidez a la hora de salbar y actualizar los datos
+de las partidas.
+Todo se ha creado según los requisitos y añadido según hemos ido probando cosas,cremeos 
+que tiene lo necesario para un uso estandar, aún así pensamos que se pueden hacer mejoras 
+que con más tiempo y madurez en nuestro aprendizaje se podrian lograr.

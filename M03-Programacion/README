@@ -1,1 +1,16 @@
+En esta seccion, que es el pilar del proyecto, hemos ido elaborando un procedimiento, en cual
+nos hemos repartido de forma estrategica para no tener conflictos a la hora de hacer merges.
+Esta gestionado a partes iguales, de esta manera todo el grupo ha sido participe de la creacion
+del programa, sean realizado consultas en equipo y ante muros que se nos han creado para crearlo , heos accedido ha 
+realizar consultas a diferentes plataformas y herramientas que nos han hecho el trayecto
+ algo mas accesible, sobretodo con la parte de genrar el apartado de la interface grafica
+y con la conexion de la base de datos.
+Hemos realizado miles de cambios en el codigo, infinad de pruebas  y varios conflictos 
+sobretodo a la hora de compilar y de conectar con los datos.
+Al final, una vez resueltos los conflictos y de consolidar de manera correcta la base en la prueba local
+conseguimos realizar con exito un testeo del funcionamiento, se comprueban los diferentes apartados
+y todos funcionan correctamente.
+Según a nuestro entendimiento de las reglas y proceso del juego, podriamos decir que estamos seguros de que esta todo realizado.
+Pedimos disculpas si se nos paso algo por alto y aceptamos cualquier critica u opnion al respecto.
+
 
