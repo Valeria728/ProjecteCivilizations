@@ -94,29 +94,21 @@ hbs.registerHelper('getLogClass', function(logEntry) {
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, '../public')));
 
-// ─── CONEXIÓN A LA BASE DE DATOS ───────────────────────────────────────────
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',         
-    password: '1234.',     
-    database: 'civilizations_db'
-});
-
-db.connect((err) => {
-    if (err) console.error('Error al conectar con la BD:', err.message);
-    else console.log('Conexión a MySQL OK');
-});
 
 // ─── RUTAS ───────────────────────────────────────
 // ─── RUTAS CORREGIDAS Y DESANIDADAS ───────────────────────────────────────
 
 
 // 1. Ruta Principal (Corregida para usar Callbacks tradicionales como el resto)
-app.get('/', (req, res) => {
-    const sqlBatallas = `
-        SELECT bs.num_battle, bs.wood_acquired, bs.iron_acquired,
-               SUM(cas.drops) AS civilization_drops,
-               SUM(eas.drops) AS enemy_drops
+app.get('/', async (req, res) => {
+    try {
+        // Obtenir les dades de la base de dades
+        const rows = await db.query(`
+        SELECT bs.num_battle as num_battle, 
+        bs.wood_acquired as wood_acquired, 
+        bs.iron_acquired as iron_acquired,
+        SUM(cas.drops) AS civilization_drops,
+        SUM(eas.drops) AS enemy_drops
         FROM battle_stats bs
         LEFT JOIN civilization_attack_stats cas ON bs.num_battle = cas.num_battle AND bs.civilization_id = cas.civilization_id
         LEFT JOIN enemy_attack_stats eas ON bs.num_battle = eas.num_battle AND bs.civilization_id = eas.civilization_id
@@ -124,20 +116,27 @@ app.get('/', (req, res) => {
         GROUP BY bs.num_battle, bs.wood_acquired, bs.iron_acquired
         ORDER BY bs.num_battle DESC
         LIMIT 2
-    `;
+        `);
 
-    db.query(sqlBatallas, (err, batallas) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Error consultando la base de datos');
-        }
-        // Renderiza la vista de inicio enviando las batallas encontradas
-        res.render('index', { batallas: batallas || [] });
-    });
+        const data = db.table_to_json(rows, { 
+         num_battle: 'number', 
+         wood_acquired: 'number',
+         iron_acquired: 'number',
+         civilization_drops: 'number',
+         enemy_drops: 'number'
+        });
+
+        // Renderitzar la plantilla amb les dades
+        res.render('index', data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error consultant la base de dades');
+    }
+    
 });
 
 // 2. Ruta de Batallas
-app.get('/batallas', (req, res) => {
+app.get('/batallas', async (req, res) => {
     const sqlTotal = `SELECT COUNT(*) AS total FROM battle_stats WHERE civilization_id = 1`;
     const sqlBatallas = `
         SELECT bs.num_battle, bs.wood_acquired, bs.iron_acquired,
@@ -159,7 +158,7 @@ app.get('/batallas', (req, res) => {
 
 
 // 3. Ruta de Informe (¡DESANIDADA usando funciones independientes!)
-app.get('/informe', (req, res) => {
+app.get('/informe', async (req, res) => {
     const id = parseInt(req.query.id) || 1;
 
     const sqlBatalla = `SELECT * FROM battle_stats WHERE num_battle = ? AND civilization_id = 1`;
@@ -238,7 +237,7 @@ app.get('/informe', (req, res) => {
 
 
 // 4. Ruta de Civilización
-app.get('/civilizacion', (req, res) => {
+app.get('/civilizacion', async (req, res) => {
     const sqlCiv = `SELECT * FROM civilization_stats WHERE civilization_id = 1`;
     db.query(sqlCiv, (err, result) => {
         res.render('civilizacion', { civ: (err || !result.length) ? null : result[0] });
@@ -246,7 +245,7 @@ app.get('/civilizacion', (req, res) => {
 });
 
 // 5. Ruta de Programadores
-app.get('/programadores', (req, res) => {
+app.get('/programadores', async (req, res) => {
     const programadores = [
         { nombre: 'Valeria', rol: 'Programador Java', foto: "img/knight.png", tareas: ['Clase Civilization y excepciones', 'Clases de unidades de ataque', 'Interface MilitaryUnit y Variables'] },
         { nombre: 'Miguel', rol: 'Programador Java', foto: "img/miguel.png", tareas: ['Clase Battle', 'Clases de unidades defensivas y especiales', 'Clase Main y TimerTask'] },
@@ -256,15 +255,14 @@ app.get('/programadores', (req, res) => {
 });
 
 // Inicio del servidor
+// Start server
 const httpServer = app.listen(port, () => {
-  console.log(`Servidor corriendo en: http://localhost:${port}`);
+  console.log(`http://localhost:${port}`);
 });
 
-// Cierre limpio
-process.on('SIGINT', () => {
-  db.end((err) => {
-     httpServer.close(() => {
-         process.exit(0);
-     });
-  });
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  await db.end();
+  httpServer.close();
+  process.exit(0);
 });
