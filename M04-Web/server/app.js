@@ -70,8 +70,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 // ─── CONEXIÓN A LA BASE DE DATOS ───────────────────────────────────────────
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',         
-    password: '1234.',     
+    user: 'miguel',         
+    password: 'civilizacion.',     
     database: 'civilizations_db'
 });
 
@@ -166,4 +166,6 @@ app.get('/programadores', (req, res) => {
     res.render('programadores', { programadores });
 });
 
-app.listen(PORT, () => console.log('Servidor arrancado en http://localhost:' + PORT));
+app.listen(PORT, () => {
+    console.log(`Servidor arrancado en http://localhost:${PORT}`);
+});
