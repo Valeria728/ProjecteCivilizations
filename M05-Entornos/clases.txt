@@ -1,0 +1,17 @@
+Civilization
+Resource
+Building
+MilitaryUnit (interface)
+AttackUnit
+DefenseUnit
+SpecialUnit
+
+Civilization tiene:
+- recursos
+- edificios
+- unidades
+
+MilitaryUnit es implementada por:
+- AttackUnit
+- DefenseUnit
+- SpecialUnit

@@ -47,7 +47,7 @@ public class ArmyPanel extends JPanel {
         grid.add(makeHeader(""));
 
         // Ataque
-        lblTotalSwordsman = addRow(grid, "⚔ Espadachín",   civ.getArmy()[0].size(), spSwordsman = makeSpinner());
+        lblTotalSwordsman = addRow(grid, "⚔ Espadachín",    civ.getArmy()[0].size(), spSwordsman = makeSpinner());
         spSwordsman = (JSpinner) getLastSpinner(grid);
         addCreateButton(grid, "Espadachín",   spSwordsman);
 
