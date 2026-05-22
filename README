@@ -1,0 +1,10 @@
+En estos dias hemos ido realizando todo el apartado de html, tubimos que rehacer toda la web debido al mal 
+entendido con el tipo de archivos, en el pdf ponia .ejs y eran .hbs, nos parecio extraño, pero como hemos ido haciendo 
+cosas que no estaban explicadas y vimosd la existencia de este tippo de formato que existia, nos pusimos manos a la obra.
+Despues de tener todo hecho  se realizo la modificacion a .hbs una vez se supo que eran en ese 
+formato...muchas horas perdidas.
+Al final funciona.
+En los dias posteriores hemos ido incorporando alguna mejora sobretodo visual, como el añadir imagenes, modificar inconos
+y algo que suele acompañar de manera casi fiel a este tipo de diseños , decidimos incorporar audio
+para que la experiencia de navegacion fuera más llamatiba para el usuario, creando así 
+una sensación más inmersiva.
