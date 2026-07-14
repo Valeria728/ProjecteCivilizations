@@ -12,15 +12,15 @@ import interfaces.MilitaryUnit;
 import units.AttackUnit;
 import units.DefenseUnit;
 import units.SpecialUnit;
-import units.attack.Cannon;
-import units.attack.Crossbow;
-import units.attack.Spearman;
-import units.attack.Swordsman;
+//import units.attack.Cannon;
+//import units.attack.Crossbow;
+//import units.attack.Spearman;
+//import units.attack.Swordsman;
 //import units.special.Magician;
 //import units.special.Priest;
 
-import java.sql.*;
-import java.util.ArrayList;
+//import java.sql.*;
+//import java.util.ArrayList;
 
 //DAO (Data Access Object) para la clase Civilization.
 //Se encarga de guardar y cargar el estado de la civilización en la base de datos.
